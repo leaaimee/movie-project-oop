@@ -1,0 +1,97 @@
+{
+    "The Batman": {
+        "year": 2022,
+        "rating": 8.0,
+        "poster": "N/A"
+    },
+    "Pulp Fiction": {
+        "year": 1994,
+        "rating": 9.0,
+        "poster": "N/A"
+    },
+    "The Godfather": {
+        "year": 1972,
+        "rating": 9.0,
+        "poster": "N/A"
+    },
+    "The Dark Knight": {
+        "year": 2008,
+        "rating": 9.0,
+        "poster": "N/A"
+    },
+    "Forrest Gump": {
+        "year": 1994,
+        "rating": 9.0,
+        "poster": "N/A"
+    },
+    "Star Wars: Episode V": {
+        "year": 2015,
+        "rating": 8.0,
+        "poster": "N/A"
+    },
+    "Fight Club": {
+        "year": 1999,
+        "rating": 9.0,
+        "poster": "N/A"
+    },
+    "The Crow": {
+        "year": 1994,
+        "rating": 8.0,
+        "poster": "N/A"
+    },
+    "The Da Vinci Code": {
+        "year": 2008,
+        "rating": 6.0,
+        "poster": "N/A"
+    },
+    "Kill Bill: Volume 1": {
+        "year": 2003,
+        "rating": 9.0,
+        "poster": "N/A"
+    },
+    "Kill Bill: Volume 2": {
+        "year": 2004,
+        "rating": 8.0,
+        "poster": "N/A"
+    },
+    "Jackie Brown": {
+        "year": 1997,
+        "rating": 7.0,
+        "poster": "N/A"
+    },
+    "The Last Unicorn": {
+        "year": 1982,
+        "rating": 7.0,
+        "poster": "N/A"
+    },
+    "The Addams Family": {
+        "year": 1991,
+        "rating": 7.0,
+        "poster": "N/A"
+    },
+    "300": {
+        "year": 2006,
+        "rating": 8.0,
+        "poster": "N/A"
+    },
+    "Sin City": {
+        "year": 2005,
+        "rating": 8.0,
+        "poster": "N/A"
+    },
+    "Sin City: A Dame to Kill For": {
+        "year": 2014,
+        "rating": 6.5,
+        "poster": "N/A"
+    },
+    "Inferno": {
+        "year": 2016,
+        "rating": 6.6,
+        "poster": "N/A"
+    },
+    "Joker": {
+        "year": 2019,
+        "rating": 8.3,
+        "poster": "N/A"
+    }
+}
