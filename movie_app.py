@@ -6,6 +6,7 @@ class MovieApp:
         self._storage = storage
 
     def _command_list_movies(self):
+        """ List all movies currently stored in the database """
         movies = self._storage.list_movies()
 
         movie_count = len(movies)
@@ -31,6 +32,7 @@ class MovieApp:
     #         print(f"Movie '{title}' added successfully!")
 
     def _command_add_movie(self):
+        """ Add a new movie by fetching data from the OMDb API """
         title = input("Enter the movie title: ")
         movie_data = fetch_movie_data(title)
 
@@ -47,6 +49,7 @@ class MovieApp:
 
 
     def _command_delete_movie(self):
+        """ Delete a movie from the database by title """
         title = input("Enter movie title: ").strip().capitalize()
 
         message = self._storage.delete_movie(title)
@@ -56,6 +59,7 @@ class MovieApp:
             print(f"Movie '{title}' was deleted successfully!")
 
     def _command_update_movie(self):
+        """ Update the rating of a movie in the database """
         title = input("Enter the movie you want to update: ").strip().capitalize()
         rating = float(input("Enter a new rating (1-10): "))
 
@@ -121,6 +125,7 @@ class MovieApp:
 
 
     def _command_generate_website(self):
+        """ Generate an HTML website displaying all movies from the database """
         movies = self._storage.list_movies()
 
         if not movies:
