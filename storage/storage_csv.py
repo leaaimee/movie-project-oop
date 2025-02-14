@@ -42,8 +42,9 @@ class StorageCsv(IStorage):
     def delete_movie(self, title):
         """ Delete a movie from the csv file """
         movies = self.list_movies()
-        if title in movies:
-            del movies[title]
+        for stored_title in movies:
+            if stored_title.lower() == title.lower():
+                del movies[stored_title]
 
             with open(self.file_path, "w", newline="") as file:
                 writer = csv.DictWriter(file, fieldnames=["title", "year", "rating", "poster"])
@@ -63,11 +64,12 @@ class StorageCsv(IStorage):
     def update_movie(self, title, rating):
         """ Update the rating of a movie in the CSV file """
         movies = self.list_movies()
-        if title in movies:
-            movies[title]["rating"] = rating
-            self.save_movies(movies)  # Delegate file saving
-            return f"Movie '{title}' updated successfully."
-        return f"Movie '{title}' not found."
+        for stored_title in movies:
+            if stored_title.lower() == title.lower():
+                movies[stored_title]["rating"] = rating
+                self.save_movies(movies)
+                return None
+        return f"Movie '{title}' not found "
 
 
     def save_movies(self, movies):

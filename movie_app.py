@@ -50,7 +50,7 @@ class MovieApp:
 
     def _command_delete_movie(self):
         """ Delete a movie from the database by title """
-        title = input("Enter movie title: ").strip().capitalize()
+        title = input("Enter movie title: ").strip()
 
         message = self._storage.delete_movie(title)
         if message:
@@ -58,9 +58,10 @@ class MovieApp:
         else:
             print(f"Movie '{title}' was deleted successfully!")
 
+
     def _command_update_movie(self):
         """ Update the rating of a movie in the database """
-        title = input("Enter the movie you want to update: ").strip().capitalize()
+        title = input("Enter the movie you want to update: ").strip()
         rating = float(input("Enter a new rating (1-10): "))
 
         message = self._storage.update_movie(title, rating)
@@ -124,6 +125,68 @@ class MovieApp:
             worst_movie))
 
 
+    def _command_search_movies(self):
+        """ Search for movies by title """
+        search_title = input("Enter the title to search for: ").strip()
+        movies = self._storage.list_movies()
+        found_movies = [
+            (title, movie_data["year"], movie_data["rating"])
+            for title, movie_data in movies.items()
+            if search_title.lower() in title.lower()
+        ]
+
+        if found_movies:
+            print("\nFound Movies:")
+            for title, year, rating in found_movies:
+                print(f"{title} ({year}) - Rating: {rating}")
+        else:
+            print("No movies found matching the search criteria ")
+
+
+    def _command_sort_by_rating(self):
+        """ Sort movies by rating in ascending or descending order """
+        order = input("Enter '1' for ascending order or '2' for descending order: ").strip()
+        if order not in ["1", "2"]:
+            print("Invalid input. Please enter '1' or '2'.")
+            return
+
+        sorted_movies = sorted(self._storage.list_movies().items(), key=lambda item: item[1]["rating"],
+                               reverse=(order == "2"))
+        if sorted_movies:
+            print("\nMovies sorted by rating:\n")
+            for title, movie_data in sorted_movies:
+                print(f"{title} ({movie_data['year']}): {movie_data['rating']}")
+        else:
+            print("No movies found to sort ")
+
+
+    def _command_sorted_by_year(self):
+        """ Display all movies sorted by year """
+        order = input("Sort by year: 1 (Ascending) or 2 (Descending): ").strip()
+        sorted_movies = self.sorted_by_year(order)
+
+        if isinstance(sorted_movies, str):
+            print(sorted_movies)
+        else:
+            print("\nMovies sorted by year:")
+            for title, year, rating in sorted_movies:
+                print(f"{title} ({year}), Rating: {rating}")
+
+
+    def sorted_by_year(self, order):
+        """Display all movies sorted by the year of release, ascending or descending"""
+        movies = self._storage.list_movies()  # Adjust to use storage correctly
+
+        if order == "1":
+            movies_years = sorted(movies.items(), key=lambda item: item[1]["year"])
+        elif order == "2":
+            movies_years = sorted(movies.items(), key=lambda item: item[1]["year"], reverse=True)
+        else:
+            return "Invalid input. Please enter '1' or '2'"
+
+        return [(title, movie_data["year"], movie_data["rating"]) for title, movie_data in movies_years]
+
+
     def _command_generate_website(self):
         """ Generate an HTML website displaying all movies from the database """
         movies = self._storage.list_movies()
@@ -169,7 +232,10 @@ class MovieApp:
             "3": self._command_delete_movie,
             "4": self._command_update_movie,
             "5": self._command_list_movie_stats,
-            "6": self._command_generate_website,
+            "6": self._command_search_movies,
+            "7": self._command_sort_by_rating,
+            "8": self._command_sorted_by_year,
+            "9": self._command_generate_website,
             "0": self._command_exit,
         }
 
@@ -180,7 +246,10 @@ class MovieApp:
             print("3. Delete Movie")
             print("4. Update Movie")
             print("5. Movie Statistics")
-            print("6. Generate Website")
+            print("6. Search Movies")
+            print("7. Sort Movies By Rating")
+            print("8. Sort Movies By Year")
+            print("9. Generate Website")
             print("0. Exit")
 
             choice = input("Choose an option: ")

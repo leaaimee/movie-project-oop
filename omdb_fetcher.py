@@ -34,6 +34,9 @@ def extract_movie_data(raw_data):
     except Exception as e:
         return {"Error": str(e)}
 
+
+
+
 if __name__ == "__main__":
 
     raw_data = fetch_movie_data("Titanic")

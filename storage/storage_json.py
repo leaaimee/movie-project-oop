@@ -29,27 +29,29 @@ class StorageJson(IStorage):
             "poster": poster
         }
         self.save_movies(movies)
-        return None
+        return f"Movie name {title} found & added "
 
 
     def delete_movie(self, title):
         """ Delete a movie from the JSON file """
         movies = self.list_movies()
-        if title in movies:
-            del movies[title]
-            self.save_movies(movies)
-            return None
+        for stored_title in movies:
+            if stored_title.lower() == title.lower():
+                del movies[title]
+                self.save_movies(movies)
+                return None
         return f"Movie '{title}' not found."
 
 
     def update_movie(self, title, rating):
         """ Update the rating of a movie """
         movies = self.list_movies()
-        if title in movies:
-            movies[title]["rating"] = rating
-            self.save_movies(movies)
-            return None
-        return f"Movie '{title}' not found."
+        for stored_title in movies:
+            if stored_title.lower() == title.lower():
+                movies[stored_title]["rating"] = rating
+                self.save_movies(movies)
+                return None
+        return f"Movie '{title}' not found "
 
 
     def save_movies(self, movies):
